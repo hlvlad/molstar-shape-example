@@ -2,10 +2,12 @@
   "name": "molstar-demo",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://hlvlad.github.io/molstar-shape-example/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.7.1",
+    "gh-pages": "^3.1.0",
     "molstar": "^1.3.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
@@ -18,7 +20,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
