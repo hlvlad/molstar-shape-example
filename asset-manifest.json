@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/molstar-shape-example/static/css/main.8c8b27cf.chunk.css",
+    "main.js": "/molstar-shape-example/static/js/main.92ad2653.chunk.js",
+    "main.js.map": "/molstar-shape-example/static/js/main.92ad2653.chunk.js.map",
+    "runtime-main.js": "/molstar-shape-example/static/js/runtime-main.cdb1d4d0.js",
+    "runtime-main.js.map": "/molstar-shape-example/static/js/runtime-main.cdb1d4d0.js.map",
+    "static/css/2.9e05a0d9.chunk.css": "/molstar-shape-example/static/css/2.9e05a0d9.chunk.css",
+    "static/js/2.1789504c.chunk.js": "/molstar-shape-example/static/js/2.1789504c.chunk.js",
+    "static/js/2.1789504c.chunk.js.map": "/molstar-shape-example/static/js/2.1789504c.chunk.js.map",
+    "static/js/3.2b381a4b.chunk.js": "/molstar-shape-example/static/js/3.2b381a4b.chunk.js",
+    "static/js/3.2b381a4b.chunk.js.map": "/molstar-shape-example/static/js/3.2b381a4b.chunk.js.map",
+    "index.html": "/molstar-shape-example/index.html",
+    "static/css/2.9e05a0d9.chunk.css.map": "/molstar-shape-example/static/css/2.9e05a0d9.chunk.css.map",
+    "static/css/main.8c8b27cf.chunk.css.map": "/molstar-shape-example/static/css/main.8c8b27cf.chunk.css.map",
+    "static/js/2.1789504c.chunk.js.LICENSE.txt": "/molstar-shape-example/static/js/2.1789504c.chunk.js.LICENSE.txt",
+    "static/media/logo.6ce24c58.svg": "/molstar-shape-example/static/media/logo.6ce24c58.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.cdb1d4d0.js",
+    "static/css/2.9e05a0d9.chunk.css",
+    "static/js/2.1789504c.chunk.js",
+    "static/css/main.8c8b27cf.chunk.css",
+    "static/js/main.92ad2653.chunk.js"
+  ]
+}
