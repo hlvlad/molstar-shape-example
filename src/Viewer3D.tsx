@@ -14,7 +14,6 @@ const Viewer3D = () => {
 
   useEffect(() => {
     if (molstarPlugin) {
-        console.log("TEST");
         molstarPlugin.loadFigures();
     }
   }, [molstarPlugin]);

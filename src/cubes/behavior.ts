@@ -6,7 +6,9 @@ import {Task} from "molstar/lib/mol-task";
 
 import {
     TubeRepresentation,
-    TubeParams
+    TubeParams,
+    SquareRepresentation,
+    SquareParams
 } from "./representation";
 
 const CreateTransformer = StateTransformer.builderFactory('example-namespace');
@@ -30,6 +32,30 @@ export const CreateTube = CreateTransformer({
             const repr = TubeRepresentation({webgl: plugin.canvas3d?.webgl, ...plugin.representation.structure.themes}, () => TubeParams);
             await repr.createOrUpdate({}, params).runInContext(ctx);
             return new PluginStateObject.Shape.Representation3D({repr, source: a}, {label: `Tube ${params.index}`});
+        });
+    }
+});
+
+
+export const CreateShape = CreateTransformer({
+    name: 'create-shape',
+    display: 'Shape',
+    from: PluginStateObject.Root,
+    to: PluginStateObject.Shape.Representation3D,
+    params: {
+        index: PD.Numeric(0),
+        vertices: PD.Value([] as number[]),
+        size: PD.Numeric(1.6)
+    }
+})({
+    canAutoUpdate({oldParams, newParams}) {
+        return true;
+    },
+    apply({a, params}, plugin: PluginContext) {
+        return Task.create('Shape', async ctx => {
+            const repr = SquareRepresentation({webgl: plugin.canvas3d?.webgl, ...plugin.representation.structure.themes}, () => SquareParams);
+            await repr.createOrUpdate({}, params).runInContext(ctx);
+            return new PluginStateObject.Shape.Representation3D({repr, source: a}, {label: `Square ${params.index}`});
         });
     }
 });

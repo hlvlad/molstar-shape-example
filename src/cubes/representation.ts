@@ -11,6 +11,8 @@ import {Mesh} from "molstar/lib/mol-geo/geometry/mesh/mesh";
 import {Shape} from "molstar/lib/mol-model/shape/shape";
 import {DefaultCylinderProps} from "molstar/lib/mol-geo/primitive/cylinder";
 
+/* TUBE REPRESENTATION */
+
 interface TubeData {
   points: number[],
   size: number
@@ -55,4 +57,47 @@ export type TubeRepresentation = Representation<TubeData, TubeParams>
 
 export function TubeRepresentation(ctx: RepresentationContext, getParams: RepresentationParamsGetter<TubeData, TubeParams>): TubeRepresentation {
   return Representation.createMulti('Tube', ctx, getParams, Representation.StateBuilder, TubeVisuals as unknown as Representation.Def<TubeData, TubeParams>)
+}
+
+/* SQUARE REPRESENTATION */
+
+interface SquareData {
+  vertices: number[],
+  size: number
+  index: number
+}
+
+export const SquareParams = {
+  ...Mesh.Params,
+  doubleSided: PD.Boolean(true)
+}
+export type SquareParams = typeof SquareParams;
+export type SquareProps = PD.Values<SquareParams>
+
+const SquareVisuals = {
+  'mesh': (ctx: RepresentationContext, getParams: RepresentationParamsGetter<SquareData, SquareParams>) => ShapeRepresentation(getSquareShape, Mesh.Utils)
+}
+
+function getSquareMesh(data: SquareData, props: SquareProps, mesh?: Mesh) {
+  // Here I'm trying to create custom mesh from plain vertices array.
+  // Example array is simple square
+  const state = MeshBuilder.createState(256, 128, mesh);
+  for (let i = 0; i < data.vertices.length-8; i+=9) {
+    MeshBuilder.addTriangle(state,
+      Vec3.create(data.vertices[i], data.vertices[i + 1], data.vertices[i + 2]),
+      Vec3.create(data.vertices[i + 3], data.vertices[i + 4], data.vertices[i + 5]),
+      Vec3.create(data.vertices[i + 6], data.vertices[i + 7], data.vertices[i + 8]),
+    );
+  }
+  return MeshBuilder.getMesh(state);
+}
+
+function getSquareShape(ctx: RuntimeContext, data: SquareData, props: SquareProps, shape?: Shape<Mesh>) {
+    const geo = getSquareMesh(data, props, shape && shape.geometry);
+    return Shape.create(`Square ${data.index}`, data, geo, () => Color.fromRgb(0, 255, 0), () => data.size, () => `Square ${data.index}`);
+}
+export type SquareRepresentation = Representation<SquareData, SquareParams>
+
+export function SquareRepresentation(ctx: RepresentationContext, getParams: RepresentationParamsGetter<SquareData, SquareParams>): SquareRepresentation {
+  return Representation.createMulti('Square', ctx, getParams, Representation.StateBuilder, SquareVisuals as unknown as Representation.Def<SquareData, SquareParams>)
 }

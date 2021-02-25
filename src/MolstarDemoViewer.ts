@@ -5,17 +5,12 @@ import { PluginSpec } from "molstar/lib/mol-plugin/spec";
 import { PluginLayoutControlsDisplay } from "molstar/lib/mol-plugin/layout";
 import { PluginConfig } from "molstar/lib/mol-plugin/config";
 import { BuiltInTrajectoryFormat } from "molstar/lib/mol-plugin-state/formats/trajectory";
-// import { RNAspiderTypes, RNAspiderTypes as RST } from "./punctures/types";
-// import { CreateEdge, CreatePuncture, CreateStructuralElement, CreateSurface, CreateTest } from "./punctures/behavior";
-import { Vec3 } from "molstar/lib/mol-math/linear-algebra/3d";
 import { createStructureRepresentationParams } from "molstar/lib/mol-plugin-state/helpers/structure-representation-params";
 import { StateTransforms } from "molstar/lib/mol-plugin-state/transforms";
 import {
   applyBuiltInSelection,
-  StructureSelectionQueries
 } from "molstar/lib/mol-plugin-state/helpers/structure-selection-query";
-import Viewer3D from "./Viewer3D";
-import { CreateTube } from "./cubes/behavior";
+import { CreateTube, CreateShape } from "./cubes/behavior";
 
 require("molstar/lib/mol-plugin-ui/skin/light.scss");
 
@@ -96,6 +91,7 @@ export class MolstarDemoViewer {
 
   async loadFigures() {
     const structure = this.plugin.build().toRoot();
+
     const shapesGroup1 = structure.apply(StateTransforms.Misc.CreateGroup, { label: 'Group 1' })
     shapesGroup1.apply(CreateTube, {
       index: 1,
@@ -105,6 +101,7 @@ export class MolstarDemoViewer {
               13, 16, 13],
       size: 1.6
     })
+
     const shapesGroup2 = structure.apply(StateTransforms.Misc.CreateGroup, { label: 'Group 2' })
     shapesGroup2.apply(CreateTube, {
       index: 1,
@@ -113,6 +110,17 @@ export class MolstarDemoViewer {
               10, 10, 10,
               13, 16, 13],
       size: 1.6
+    })
+
+    structure.apply(CreateShape, {
+      index: 0,
+      vertices: [1, 1, 1,
+                 1, 10, 1,
+                 10, 10, 1,
+                 10, 10, 1,
+                 10, 1, 1, 
+                 1, 1, 1],
+      size: 1
     })
     await structure.commit();
   }
